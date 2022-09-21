@@ -1,32 +1,32 @@
-//Расчёт морской мили;
-//Расчёт сухопутной мили;
-//Расчёт римcкой мили;
-//Расчёт старорусской мили;
-//Расчёт географической мили;
+//Р Р°СЃС‡С‘С‚ РјРѕСЂСЃРєРѕР№ РјРёР»Рё;
+//Р Р°СЃС‡С‘С‚ СЃСѓС…РѕРїСѓС‚РЅРѕР№ РјРёР»Рё;
+//Р Р°СЃС‡С‘С‚ СЂРёРјcРєРѕР№ РјРёР»Рё;
+//Р Р°СЃС‡С‘С‚ СЃС‚Р°СЂРѕСЂСѓСЃСЃРєРѕР№ РјРёР»Рё;
+//Р Р°СЃС‡С‘С‚ РіРµРѕРіСЂР°С„РёС‡РµСЃРєРѕР№ РјРёР»Рё;
 
 #define _CRT_SECURE_NO_DEPRECATE
 #include<stdio.h>
 #include<locale.h>
-#define      MM        1.852    //км
-#define      SM        1.609    //км
-#define      RM        1475     //км
-#define      StarM     7.468    //км
-#define      GeogM     7412.6   //км
+#define      MM        1.852    //РєРј
+#define      SM        1.609    //РєРј
+#define      RM        1475     //РєРј
+#define      StarM     7.468    //РєРј
+#define      GeogM     7412.6   //РєРј
 void main()
 {
 	setlocale(LC_ALL, "RUS");
 	int dym;
 	float result1, result2, result3, result4, result5;
-	printf("Введите число\n\n");
+	printf("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ\n\n");
 	scanf("%d", &dym);
 	result1 = MM * dym;
 	result2 = SM * dym;
 	result3 = RM * dym;
 	result4 = StarM * dym;
 	result5 = GeogM * dym;
-	printf("\n%d морских(ая) миль(я) – это %.2f км\n", dym, result1);
-	printf("\n%d сухопутных(ая) миль(я) – это %.2f км\n", dym, result2);
-	printf("\n%d римcких(ая) миль(я) – это %.2f км\n", dym, result3);
-	printf("\n%d старорусских(ая) миль(я) – это %.2f км\n", dym, result4);
-	printf("\n%d географических(ая) миль(я) – это %.2f км\n", dym, result5);
+	printf("\n%d РјРѕСЂСЃРєРёС…(Р°СЏ) РјРёР»СЊ(СЏ) вЂ“ СЌС‚Рѕ %.2f РєРј\n", dym, result1);
+	printf("\n%d СЃСѓС…РѕРїСѓС‚РЅС‹С…(Р°СЏ) РјРёР»СЊ(СЏ) вЂ“ СЌС‚Рѕ %.2f РєРј\n", dym, result2);
+	printf("\n%d СЂРёРјcРєРёС…(Р°СЏ) РјРёР»СЊ(СЏ) вЂ“ СЌС‚Рѕ %.2f РєРј\n", dym, result3);
+	printf("\n%d СЃС‚Р°СЂРѕСЂСѓСЃСЃРєРёС…(Р°СЏ) РјРёР»СЊ(СЏ) вЂ“ СЌС‚Рѕ %.2f РєРј\n", dym, result4);
+	printf("\n%d РіРµРѕРіСЂР°С„РёС‡РµСЃРєРёС…(Р°СЏ) РјРёР»СЊ(СЏ) вЂ“ СЌС‚Рѕ %.2f РєРј\n", dym, result5);
 }
