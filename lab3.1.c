@@ -5,16 +5,16 @@ void main()
 {
 	setlocale(LC_ALL, "RUS");
 	int num, bum;
-	printf("Введите число\n");
+	printf("Р’РІРµРґРёС‚Рµ С‡РёСЃР»Рѕ\n");
 	scanf("%d", &num);
-	printf("Введено число %d\n", num);
-	printf("\nВведите второе число\n");
+	printf("Р’РІРµРґРµРЅРѕ С‡РёСЃР»Рѕ %d\n", num);
+	printf("\nР’РІРµРґРёС‚Рµ РІС‚РѕСЂРѕРµ С‡РёСЃР»Рѕ\n");
 	scanf("%d", &bum);
-	printf("Введено число %d\n", bum);
-	printf("\nСумма %d и %d = %d\n", num, bum, num + bum);
-	printf("\nРазность %d и %d = %d\n", num, bum, num - bum);
-	printf("\nПроизведение %d и %d = %d\n", num, bum, num * bum);
-	printf("\nЧастное %d и %d = %d\n", num, bum, num / bum);
-	printf("\nОстаток от деления %d на %d равен %d\n", bum, num, bum % num);
+	printf("Р’РІРµРґРµРЅРѕ С‡РёСЃР»Рѕ %d\n", bum);
+	printf("\nРЎСѓРјРјР° %d Рё %d = %d\n", num, bum, num + bum);
+	printf("\nР Р°Р·РЅРѕСЃС‚СЊ %d Рё %d = %d\n", num, bum, num - bum);
+	printf("\nРџСЂРѕРёР·РІРµРґРµРЅРёРµ %d Рё %d = %d\n", num, bum, num * bum);
+	printf("\nР§Р°СЃС‚РЅРѕРµ %d Рё %d = %d\n", num, bum, num / bum);
+	printf("\nРћСЃС‚Р°С‚РѕРє РѕС‚ РґРµР»РµРЅРёСЏ %d РЅР° %d СЂР°РІРµРЅ %d\n", bum, num, bum % num);
 	system("pause");
 }
