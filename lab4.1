@@ -1,0 +1,28 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include<stdio.h>
+#include<locale.h>
+void naim()
+{
+	setlocale(LC_ALL, "RUS");
+	char c = '!';
+	int i = 2;
+	float f = 3.14f;
+	double d = 5e-12;
+	printf("char = %c, int = %i, float = %f, double = %lf\n", c, i, f, d);
+
+	printf("Введите значение char\n");
+	scanf("%c", &c);
+	printf("Введено число %c\n\n", c);
+
+	printf("Введите значение int\n");
+	scanf("%i", &i);
+	printf("Введено число %i\n\n", i);
+
+	printf("Введите значение float\n");
+	scanf("%f", &f);
+	printf("Введено число %f\n\n", f);
+
+	printf("Введите значение double\n");
+	scanf("%lf", &d);
+	printf("Введено число %f\n\n", d);
+}
