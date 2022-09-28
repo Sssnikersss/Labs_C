@@ -4,8 +4,9 @@
 
 void main()
 {
-	int k = 2;
 	setlocale(LC_ALL, "RUS");
+	
+	int k = 2;
 	
 	printf("\tМоя %d\n\t\t%d \n\t\t    программа %d\n", k-1, k, k+1);
 	
