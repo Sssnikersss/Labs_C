@@ -1,0 +1,41 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+
+
+void main()
+{
+	setlocale(LC_ALL, "RUS");
+
+
+	int k = 8;
+	float result8, result9, result10, result11, result12;
+
+	result8 = pow(2.f, k);
+	printf("2 в степени 8 = %.0f\n", result8);
+
+
+	k = 16;
+
+	result9 = pow(2.f, k);
+	printf("2 в степени 16 = %.0f\n", result9);
+
+
+	k = (float)k * 2; //k = 32
+
+	result10 = pow(2.f, k);
+	printf("2 в степени 32 = %.0f\n", result10);
+
+
+	k = (float)k * 2; //k = 64
+
+	result11 = pow(2.f, k);
+    printf("2 в степени 64 = %.0f\n", result11);
+
+
+	k = (double)k * 2; //k = 128
+
+	result12 = pow(2.f, k);
+	printf("2 в степени 128 = %.0f\n", result12);
+}
