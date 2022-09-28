@@ -15,6 +15,7 @@
 void main()
 {
 	setlocale(LC_ALL, "RUS");
+	
 	int dym;
 	float result1, result2, result3;
 	
