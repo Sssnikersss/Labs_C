@@ -9,6 +9,6 @@ void main()
 {
 	setlocale(LC_ALL, "RUS");
 	int n = 3;
-	
-	printf("\t\t\t\t\t\t\t\t\t\t\t\tДано: \tn=3; n/333\n\nОтвет:\t%+08.2f", n / 333.);
+
+	printf("Дано:\n \t  3 \n\t 333 \n\t___________\n Ответ: \n\t%+08.2f", n / 333.);
 }
