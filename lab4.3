@@ -1,18 +1,26 @@
 #define _CRT_SECURE_NO_DEPRECATE
 #include<stdio.h>
 #include<locale.h>
+
+
 void main()
 {
 	setlocale(LC_ALL, "RUS");
+	
 	int N, third, second, first;
+	
 	printf("Введите трёхзначное число N\n");
 	scanf("%d", &N);
 	printf("Введено число %d\n\n", N);
+	
 	third = N % 10;
 	N = N / 10;
+	
 	second = N % 10;
 	N = N / 10;
+	
 	first = N % 10;
+	
 	printf("Последняя цифра - %d,\nПервая чифра - %d,\nСумма цифр - %d,\n", third, first, first + second + third);
 	printf("Число наоборот - %d%d%d.\n", third, second, first);
 }
