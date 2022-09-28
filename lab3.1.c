@@ -6,6 +6,7 @@
 void main()
 {
 	setlocale(LC_ALL, "RUS");
+	
 	int num, bum;
 	
 	
