@@ -1,0 +1,28 @@
+//Вариант 1
+// c = 0.4
+
+
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+
+
+void main()
+{
+	setlocale(LC_ALL, "RUS");
+
+	float c = 0.4, a, b, y, x;
+
+	printf("Введите значение переменной x:\n");
+	scanf("%f", &x);
+	printf("Введено значение x = %.1f\n\n", x);
+
+	a = log10(x);
+
+	b = pow(a, 2) + sqrt(c * x);
+
+	y = exp(2 * x) + pow(9.7, b);
+
+	printf("Ответ:  x = %.1f\n\ty = %.2f\n", x, y);
+}
