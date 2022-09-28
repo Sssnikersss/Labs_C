@@ -6,6 +6,7 @@
 #define _CRT_SECURE_NO_DEPRECATE
 #include<stdio.h>
 #include<locale.h>
+
 #define      D       2.54
 #define      EspD    2.32166
 #define      StarD   2.7076
