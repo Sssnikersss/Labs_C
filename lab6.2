@@ -1,0 +1,30 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+
+
+//Вариант 11
+//Контрольный пример: При x = 10, y = 401; При x = 0, y = 0.
+
+void main()
+{
+    setlocale(LC_ALL, "RUS");
+
+    double x, F1, F2, F;
+
+    printf("Введите значение x:");
+    scanf("%lf", &x);
+    printf("x = %lf\n", x);
+
+    if (x >= 3.5)
+    {
+        F1 = 4 * pow(x, 2) + (2 * x) - 19;
+    }
+    else
+    {
+        F2 = (-2 * x) / ((-4 * x) + 1);
+    }
+
+    printf("F(x) = %lf\n", F = (x >= 3.5) ? F1 : F2);
+}
