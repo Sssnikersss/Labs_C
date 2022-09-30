@@ -26,7 +26,7 @@ void main()
 	result2 = EspD * dym;
 	result3 = StarD * dym;
 	
-	printf("\n%d английских дюймов – это %.2f см\n", dym, result1);
-	printf("%d испанских дюймов – это %.2f см\n", dym, result2);
-	printf("%d старолитовских дюймов – это %.2f см\n", dym, result3);
+	printf("\n%d английский(их) дюйм(ов) – это %.2f см\n", dym, result1);
+	printf("%d испанский(их) дюйм(ов) – это %.2f см\n", dym, result2);
+	printf("%d старолитовский(их) дюйм(ов) – это %.2f см\n", dym, result3);
 }
