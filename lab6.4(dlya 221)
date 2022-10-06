@@ -1,0 +1,29 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+
+
+//Для 221 группы
+//Вариант 12
+//Контрольный пример:
+
+void main() {
+    setlocale(LC_ALL, "RUS");
+
+    double x, y;
+
+printf("Введите первую координату точки, x:");
+scanf("%lf", x);
+
+printf("Введите вторую координату точки, y:");
+scanf("%lf", y);
+
+if ((x >= -2 && y >= 2) && (x <= 3 && y <= 5) || (x >= 3 && y >= 2) && (x <= 5 && y <=3))
+ printf("Точка с введёнными координатами ПРИНАДЛЕЖИТ фигуре\n");
+else
+ printf("Точка с введёнными координатами НЕ ПРИНАДЛЕЖИТ фигуре\n");
+} 
+
+
+
