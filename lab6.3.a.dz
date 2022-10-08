@@ -1,0 +1,37 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+
+
+//Вариант 12
+
+void main()
+{
+    setlocale(LC_ALL, "RUS");
+
+    int X, first, second, third;
+
+    printf("Введите трёхзначное число X:");
+    scanf("%3d", &X);
+    printf("Введено число %3d\n\n", X);
+
+    third = X % 10;
+    X = X / 10;
+
+    second = X % 10;
+    X = X / 10;
+
+    first = X;
+
+    if (first == second && first == third)
+        printf("Число сотен, десятков и единиц равно\n");
+    else if (first == second)
+            printf("Число сотен и десятков равно\n");
+        else if (first == third)
+                printf("Число сотен и единиц равно\n");
+            else if (second == third)  
+                    printf("Число десятков и единиц равно\n");                
+                else
+                    printf("Совпадающих разрядов нет\n\n");   
+}
