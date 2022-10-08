@@ -4,18 +4,18 @@
 
 
 int main() {
-	setlocale(LC_ALL, "RUS");
+    setlocale(LC_ALL, "RUS");
 
-	char c;
+    char c;
 
-	printf("Введите любой символ: ");
-	scanf("%c", &c);
-
-	if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
-		printf("Введена буква\n");
-	else if (c >= '0' && c <= '9')
+    printf("Введите любой символ: ");
+    scanf("%c", &c);
+    
+    if ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z'))
+	printf("Введена буква\n");
+    else if (c >= '0' && c <= '9')
         printf("Введена цифра\n");
-	else 
-		printf("Неизвестный символ\n");
+    else 
+	printf("Неизвестный символ\n");
 return 0;
 }
