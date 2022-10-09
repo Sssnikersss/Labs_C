@@ -16,48 +16,48 @@ int main() {
 	  case 1: printf("Возраст составляет %d месяц\n", a); break;
 	default: 
 	  switch (a >= 2 && a <= 4) {
-		  case 1: printf("Возраст составляет %d месяца\n", a); break;
+            case 1: printf("Возраст составляет %d месяца\n", a); break;
 	  default:
-		  switch (a >= 5 && a <= 11) {
-		    case 1: printf("Возраст составляет %d месяцев\n", a); break;
+            switch (a >= 5 && a <= 11) {
+	      case 1: printf("Возраст составляет %d месяцев\n", a); break;
+	    default:
+	      switch (a == 12) {
+		case 1: printf("Возраст составляет %d год\n", a / 12); break;
+	      default:
+	        switch (a == 24 || a == 36 || a == 48) {
+	          case 1: printf("Возраст составляет %d года\n", a / 12); break;
+	        default:
+		  switch (a == 60) {
+		    case 1: printf("Возраст составляет %d лет\n", a / 12); break;
 		  default:
-		    switch (a == 12) {
-		      case 1: printf("Возраст составляет %d год\n", a / 12); break;
+	            switch (a == 13) {
+		      case 1: printf("Возраст составляет %d год и %d месяц\n", a / 12, a % 12); break;
 		    default:
-			    switch (a == 24 || a == 36 || a == 48) {
-			      case 1: printf("Возраст составляет %d года\n", a / 12); break;
+		      switch (a >= 14 && a <= 16) {
+			case 1: printf("Возраст составляет %d год и %d месяца\n", a / 12, a % 12); break;
+		      default:
+			switch (a >= 17 && a <= 23) {
+			  case 1: printf("Возраст составляет %d год и %d месяцев\n", a / 12, a % 12); break;
+			default:
+			  switch (a == 25 || a == 37 || a == 49) {
+			    case 1: printf("Возраст составляет %d года и %d месяц\n", a / 12, a % 12); break;
+			  default:
+			    switch ((a >= 26 && a <= 28) || (a >= 38 && a <= 40) || (a >= 50 && a <= 52)) {
+			      case 1: printf("Возраст составляет %d года и %d месяца\n", a / 12, a % 12); break;
 			    default:
-			      switch (a == 60) {
-				      case 1: printf("Возраст составляет %d лет\n", a / 12); break;
-			      default:
-				      switch (a == 13) {
-				        case 1: printf("Возраст составляет %d год и %d месяц\n", a / 12, a % 12); break;
-			       	default:
-				        switch (a >= 14 && a <= 16) {
-				        	case 1: printf("Возраст составляет %d год и %d месяца\n", a / 12, a % 12); break;
-				        default:
-					        switch (a >= 17 && a <= 23) {
-					          case 1: printf("Возраст составляет %d год и %d месяцев\n", a / 12, a % 12); break;
-					        default:
-					          switch (a == 25 || a == 37 || a == 49) {
-					            case 1: printf("Возраст составляет %d года и %d месяц\n", a / 12, a % 12); break;
-					          default:
-						          switch ((a >= 26 && a <= 28) || (a >= 38 && a <= 40) || (a >= 50 && a <= 52)) {
-						            case 1: printf("Возраст составляет %d года и %d месяца\n", a / 12, a % 12); break;
-						          default:
-						            switch ((a >= 29 && a <= 35) || (a >= 41 && a <= 47) || (a >= 53 && a <= 59)) {
-						              case 1: printf("Возраст составляет %d года и %d месяцев\n", a / 12, a % 12); break;
-							          default: printf("Ошибка. Повторите попытку.\n");
-						            }
-						          }
-					          }
-					        }
-				        }
-				      }
-			      }
+			      switch ((a >= 29 && a <= 35) || (a >= 41 && a <= 47) || (a >= 53 && a <= 59)) {
+			        case 1: printf("Возраст составляет %d года и %d месяцев\n", a / 12, a % 12); break;
+			      default: printf("Ошибка. Повторите попытку.\n");
+		              }
 			    }
+			  }
+			}
+		      }
 		    }
 		  }
+	        }
+              }
+            }
 	  }
 	}
 return 0;
