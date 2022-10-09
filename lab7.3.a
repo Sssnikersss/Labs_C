@@ -74,6 +74,7 @@ int main() {
 	  case 58: 
 	  case 59: printf("Возраст составляет %d года и %d месяцев\n", a / 12, a % 12); break;
 	  case 60: printf("Возраст составляет %d лет\n", a / 12); break;
+	default: printf("Ошибка. Повторите попытку.\n");
 	}
 return 0;
 }
