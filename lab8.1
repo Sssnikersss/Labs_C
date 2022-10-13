@@ -1,0 +1,24 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+
+
+int main() {
+	setlocale(LC_ALL, "RUS");
+	int n, m, s, z = 0;
+
+	printf("Введите значение n: ");
+	scanf("%d", &n);
+	printf("Введите значение m: ");
+	scanf("%d", &m);
+
+	s = 0;
+
+	for (; m >= n; n++ ,z++) {
+		s += n;
+		printf("Выполнено %d раз\n", z + 1);
+	}
+	printf("Результат %d\n", s);
+
+	return 0;
+}
