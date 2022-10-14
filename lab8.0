@@ -5,25 +5,55 @@
 
 int main() {
 	setlocale(LC_ALL, "RUS");
-	int x;
-	char y, z;
+
+	//0:
+	int n;
+	char vid1, vid2;
 
 	printf("Введите количество печатаемых символов: ");
-	scanf("%d", &x); getchar();
-	printf("Введите вид печатаемых символов первой половины: ");
-	scanf("%c", &y); getchar();
-	printf("Введите вид печатаемых символов второй половины: ");
-	scanf("%c", &z); getchar();
+	scanf("%d", &n);
+	getchar();
+	printf("Введите первый вид печатаемых символов: ");
+	scanf("%c", &vid1);
+	getchar();
+	printf("Введите второй вид печатаемых символов: ");
+	scanf("%c", &vid2);
+	getchar();
+	for (int start = 1; start <= n; start++) {
+		putchar(vid1);
+	}
+	printf("\n\n");
 
-	putchar('+');
+	//*:
+	for (int start = 1; start <= n; start++) {
+		if (start == 1) {
+			putchar('+');
+		}
+		putchar(vid1);
+		if (start == n) {
+			putchar('+');
+		}
+	}
+	printf("\n\n");
 
-	for (int start = 1; start <= x / 2; start++) {
-		putchar(y);
+	//**:
+	for (int start = 1; start <= n / 2; start++) {
+		putchar(vid1);
+	}
+	for (int start = n / 2 + 1; start <= n; start++) {
+		putchar(vid2);
+	}
+	printf("\n\n");
+
+	//***:
+	for (int start = 1; start <= n / 2; start++) {
+		putchar(vid1);
 		putchar('!');
 	}
-	for (int start = x / 2; start <= x; start++) {
-		putchar(z);
+	for (int start = n / 2 + 1; start <= n; start++) {
+		putchar(vid2);
 		putchar('!');
 	}
+	printf("\n\n");
 	return 0;
 }
