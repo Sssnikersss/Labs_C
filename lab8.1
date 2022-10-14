@@ -5,20 +5,17 @@
 
 int main() {
 	setlocale(LC_ALL, "RUS");
-	int n, m, s, z = 0;
+	int n, m, s = 0, num = 0;
 
 	printf("Введите значение n: ");
 	scanf("%d", &n);
 	printf("Введите значение m: ");
 	scanf("%d", &m);
-
-	s = 0;
-
-	for (; m >= n; n++ ,z++) {
-		s += n;
-		printf("Выполнено %d раз\n", z + 1);
+	
+	for (; m >= n; m--, num++) {
+		s += m;
+		printf("Выполнено %d раз\n", num + 1);
 	}
-	printf("Результат %d\n", s);
-
+	printf("Результат: %d\n", s);
 	return 0;
 }
