@@ -1,0 +1,40 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+#define M_PI            3.14159265358979323846
+
+
+double sin_n (double x, int N) {
+	int i;
+	double res1, sin;
+	if (N < 1)
+		printf("Ошибка. Повторите попытку.\n");
+	else {
+		x = x * M_PI / 180;
+		for (i = 1, sin = 0; i <= N; i++) {
+			res1 = pow((-1), i - 1) * (pow(x, 2 * i - 1)) / factorial(2 * i - 1);
+			sin += res1;
+		}
+		printf("sin(x) = %lf", sin);
+	}
+	return sin;
+}
+int factorial (int n)
+{
+	return (n < 2) ? 1 : n * factorial(n - 1);
+}
+
+void main() {
+	setlocale(LC_ALL, "RUS");
+	double x;
+	int N;
+
+	//2:
+	printf("Введите число суммируемых членов N не меньше 1: ");
+	scanf("%d", &N);
+	printf("Введите значение x: ");
+	scanf("%lf", &x);
+
+	printf("sin(x) = %lf", sin);
+}
