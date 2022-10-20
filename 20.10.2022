@@ -1,0 +1,27 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+
+int func (int x, int y) {
+    if ((x >= -2 && y >= 2) && (x <= 3 && y <= 5) || (x >= 3 && y >= 2) && (x <= 5 && y <= 3)) return 1;
+    else return 0;
+}
+
+void main() {
+	setlocale(LC_ALL, "RUS");
+    int x, y, X, Y;
+
+    printf("Введите значение X:");
+    scanf("%d", &X);
+    printf("Введите значение Y:");
+    scanf("%d", &Y);
+
+    for (x = -(X / 2); x <= X / 2; x++) {
+        for (y = -(Y / 2); y <= Y / 2; y-- ) {
+            if (func(x, y)) printf("*");
+            else  printf("0");
+        }
+        printf("\n");
+    }
+}
