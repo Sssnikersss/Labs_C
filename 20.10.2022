@@ -17,10 +17,14 @@ void main() {
     printf("Введите значение Y:");
     scanf("%d", &Y);
 
-    for (x = -(X / 2); x <= X / 2; x++) {
-        for (y = -(Y / 2); y <= Y / 2; y-- ) {
-            if (func(x, y)) printf("*");
-            else  printf("0");
+  
+
+    for (y = Y; y > -Y; --y)
+    {
+        for (x = -X; x < X; ++x)
+        {
+            if (func(x, y)) printf("x ");
+            else  printf("* ");
         }
         printf("\n");
     }
