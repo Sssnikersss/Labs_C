@@ -1,0 +1,53 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+
+
+void main() {
+	setlocale(LC_ALL, "RUS");
+	char c1;
+	int b, c, h, a;
+
+	while (1){
+	char a;
+
+	printf("Введите символ, из которого будет состоять фигура:");
+	scanf("%c", &c1);
+	getchar();
+	printf("Введите меньшее основание равнобедренной трапециии:");
+	scanf("%d", &b);
+	getchar();
+	printf("Введите большее основание равнобедренной трапециии:");
+	scanf("%d", &c);
+	getchar();
+	printf("Введите высоту равнобедренной трапециии:");
+	scanf("%d", &h);
+	getchar();
+	printf("Пустая трапеция внутри:\n\n");
+	a = (c - b) / 2;                     //Для того чтобы фигура корректно отображалась, ОБЯЗАТЕЛЬНО должно выполняться соотношение:                       
+	for (int j = 1; j <= c; j++) {       //(c - b) / 2 + 1 = h
+		if ((j > a) && (j <= (c - a)))
+			putchar(c1);
+		else
+			putchar(' ');
+	}
+	putchar('\n');
+	for (int i = 2; i < h; i++) {
+		for (int j = 1; j <= c; j++) {
+			if ((j == (a + 2 - i)) || (j == (a - 1 + b + i)))
+				putchar(c1);
+			else
+				putchar(' ');
+		}
+		putchar('\n');
+	}
+	for (int j = 1; j <= c; j++)
+		putchar(c1);
+	putchar('\n\n');
+	b = 0, c = 0, h = 0, a = 0;
+
+	printf("Продолжить? (Да - y, нет - n)");
+	if ((a = getchar()) == 'n') break;
+	getchar();
+	}
+}
