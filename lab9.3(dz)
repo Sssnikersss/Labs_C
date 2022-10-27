@@ -10,7 +10,6 @@ void main() {
 
 	while (1){
 	char a;
-
 	printf("Введите символ, из которого будет состоять фигура:");
 	scanf("%c", &c1);
 	getchar();
@@ -46,8 +45,8 @@ void main() {
 	putchar('\n\n');
 	b = 0, c = 0, h = 0, a = 0;
 
-	printf("Продолжить? (Да - y, нет - n)");
-	if ((a = getchar()) == 'n') break;
+	printf("Продолжить? (Да - введите любое число, нет - введите 0)");
+	if ((a = getchar()) == '0') break;
 	getchar();
 	}
 }
