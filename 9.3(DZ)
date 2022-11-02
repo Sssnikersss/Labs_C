@@ -1,0 +1,135 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+
+
+void main() {
+	setlocale(LC_ALL, "RUS");
+	char c1;
+	int b, c, h, a;
+
+	while (1) {
+		char a;
+		printf("Введите символ, из которого будет состоять фигура:");
+		scanf("%c", &c1);
+		getchar();
+		printf("Введите меньшее основание равнобедренной трапециии:");
+		scanf("%d", &b);
+		getchar();
+		printf("Введите большее основание равнобедренной трапециии:");
+		scanf("%d", &c);
+		getchar();
+		printf("Введите высоту равнобедренной трапециии:");
+		scanf("%d", &h);
+		getchar();
+		printf("Пустая трапеция внутри:\n\n");
+		a = (c - b) / 2;                                            
+		//Верхнее основание                  
+		for (int j = 1; j <= c; j++) {      
+			if ((j > a) && (j <= (c - a)))
+				putchar(c1);
+			else
+				putchar(' ');
+		}
+		putchar('\n');
+		//Для высот равных 1, 2, 3, 4
+		if (h == 1 || h == 2 || h ==3 || h == 4) {
+		 for (int i = 2; i < h; i++) {
+			for (int j = 1; j <= c; j++) {
+				if ((j == (a + 2 - i)) || (j == (a - 1 + b + i)))
+					putchar(c1);
+				else
+					putchar(' ');
+			}
+			putchar('\n');
+		 }
+		}
+		//1.1.Для нечётных "h" и "a"
+		if ((h > 4) && ((h % 2) != 0) && ((a % 2) != 0)) { 
+			for (int i = 2; i < ((h + 1) / 2); i++)
+				putchar('\n');
+			for (int i = ((h + 1) / 2); i == ((h + 1) / 2); i++) {
+				for (int j = 1; j <= c; j++) {
+					if ((j == (a / 2 + 1)) || (j == a + b + 2))
+						putchar(c1);
+					else
+						putchar(' ');
+				}
+				for (int i = ((h + 1) / 2); i < h; i++)
+					putchar('\n');
+			}
+		}
+		//1.1.Для нечётной "h" и чётной "a"
+		if ((h > 4) && ((h % 2) != 0) && ((a % 2) == 0)) {
+			for (int i = 2; i < ((h + 1) / 2); i++)
+				putchar('\n');
+			for (int i = ((h + 1) / 2); i == ((h + 1) / 2); i++) {
+				for (int j = 1; j <= c; j++) {
+					if ((j == (a / 2 + 1)) || (j == a + b + 3))
+						putchar(c1);
+					else
+						putchar(' ');
+				}
+				for (int i = ((h + 1) / 2); i < h; i++)
+					putchar('\n');
+			}
+		}
+		//2.1.Для чётных "h" и "a"
+		if ((h > 4) && ((h % 2) == 0) && ((a % 2) == 0)) {
+			for (int i = 2; i < (h / 2); i++)
+				putchar('\n');
+			for (int i = (h / 2); i == (h / 2); i++) {
+				for (int j = 1; j <= c; j++) {
+					if ((j == (a / 2 + 1)) || (j == a + b + 5))
+						putchar(c1);
+					else
+						putchar(' ');
+				}
+				for (int i = (h / 2); i < (h - 1); i++)
+					putchar('\n');
+				for (int i = (h - 1); i == (h - 1); i++) {
+					for (int j = 1; j <= c; j++) {
+						if ((j == 1) || (j == c))
+							putchar(c1);
+						else
+							putchar(' ');
+					}
+				}
+			}
+			putchar('\n');
+		}
+		//2.2.Для чётной "h" и нечётной "a"
+		if ((h > 4) && ((h % 2) == 0) && ((a % 2) != 0)) {
+			for (int i = 2; i < (h / 2); i++)
+				putchar('\n');
+			for (int i = (h / 2); i == (h / 2); i++) {
+				for (int j = 1; j <= c; j++) {
+					if ((j == (a / 2 + 2)) || (j == a + b + 2))
+						putchar(c1);
+					else
+						putchar(' ');
+				}
+				for (int i = (h / 2); i < (h - 1); i++)
+					putchar('\n');
+				for (int i = (h - 1); i == (h - 1); i++) {
+					for (int j = 1; j <= c; j++) {
+						if ((j == 2) || (j == (c - 1)))
+							putchar(c1);
+						else
+							putchar(' ');
+					}
+				}
+			}
+			putchar('\n');
+		}
+		//Нижнее основание
+		for (int j = 1; j <= c; j++)
+			putchar(c1);
+		putchar('\n\n');
+		b = 0, c = 0, h = 0, a = 0;
+
+		printf("Продолжить? (Да - введите любое число, нет - введите 0)");
+		if ((a = getchar()) == '0') break;
+		getchar();
+	}
+}
