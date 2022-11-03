@@ -1,0 +1,193 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+
+
+float square(float, float, float);
+void name();
+void figure(char, int, int, int);
+float perimetr(float, float, float);
+
+void main() {
+	setlocale(LC_ALL, "RUS");
+	char C;
+	float b2, c2, h2;
+	int n, b, c, h, a;
+	int N = 1;
+
+	while (N != 0) {
+		printf("\tВыберите одну из операций:\n");
+		printf("1)Рассчитать площадь равнобедренной трапециии;\n");
+		printf("2)Вывести определение равнобедренной трапециии;\n");
+		printf("3)Нарисовать равнобедренную трапециию.\n");
+		printf("4)Рассчитать периметр равнобедренной трапециии;\n");
+		printf("5)Завершить работу.\n");
+		scanf("%d", &n);
+		getchar();
+		putchar('\n');
+		if (n == 1) {
+			printf("Введите меньшее основание 'b', большее основание 'c' и высоту 'h' р / б трапеции через пробел: ");
+			scanf("%f %f %f", &b2, &c2, &h2);
+			getchar();
+			square(b2, c2, h2);
+		}
+		else if (n == 2) name();
+		else if (n == 3) {
+			printf("Введите символ, из которого будет состоять равнобедренная трапециия:");
+			scanf("%c", &C);
+			getchar();
+			printf("Введите меньшее основание равнобедренной трапециии:");
+			scanf("%d", &b);
+			getchar();
+			printf("Введите большее основание равнобедренной трапециии:");
+			scanf("%d", &c);
+			getchar();
+			printf("Введите высоту равнобедренной трапециии:");
+			scanf("%d", &h);
+			getchar();
+			printf("Пустая трапеция внутри:\n");
+			figure(C, b, c, h);
+		}
+		else if (n == 4) {
+			printf("Введите меньшее основание равнобедренной трапециии:");
+			scanf("%f", &b2);
+			getchar();
+			printf("Введите большее основание равнобедренной трапециии:");
+			scanf("%f", &c2);
+			getchar();
+			printf("Введите высоту равнобедренной трапециии:");
+			scanf("%f", &h2);
+			getchar();
+			perimetr(b2, c2, h2);
+		}
+		else if (n == 5) N = 0;
+		else printf("Неизвестная операция. Повторите попытку.\n\n");
+		putchar('\n');
+	}
+}
+//1:
+float square(float b2, float c2, float h2) {
+	float res = (c2 + b2) / 2 * h2;
+	printf("Площадь равнобедренной трапеции равна %.1f\n", res);
+}
+//2:
+void name() {
+	printf("Равнобедренная трапеция - это выпуклый четырёхугольник с осью симметрии,\nпроходящей через середины двух противоположных сторон.\nЭтот четырёхугольник является частным случаем трапеций.\nВ любой равнобедренной трапеции две противоположные стороны параллельны,\nа две другие стороны имеют одинаковые длины.\nДиагонали также имеют одинаковые длины.\nУглы при каждом основании равны и углы при разных основаниях являются смежными.\n");
+}
+//3
+float perimetr(float b2, float c2, float h2) {                      //Контрольный пример: при b = 4, c = 10, h = 4   Периметр = 24
+	float a1 = (c2 - b2) / 2;                                       
+	float bok, Per;
+	bok = sqrt(h2 * h2 + a1 * a1);
+	Per = b2 + c2 + 2 * bok;
+	printf("Периметр равнобедренной трапеции равен %.1f\n", Per);
+}
+//4:
+void figure(char C, int b, int c, int h) {
+	int a = (c - b) / 2;
+	//Верхнее основание                  
+	for (int j = 1; j <= c; j++) {
+		if ((j > a) && (j <= (c - a))) {
+			putchar(C);
+		}
+		else {
+			putchar(' ');
+		}
+	}
+	putchar('\n');
+	//Для высот равных 1, 2, 3, 4
+	if (h == 1 || h == 2 || h == 3 || h == 4) {
+		for (int i = 2; i < h; i++) {
+			for (int j = 1; j <= c; j++) {
+				if ((j == (a + 2 - i)) || (j == (a - 1 + b + i)))
+					putchar(C);
+				else
+					putchar(' ');
+			}
+			putchar('\n');
+		}
+	}
+	//1.1.Для нечётных "h" и "a"
+	if ((h > 4) && ((h % 2) != 0) && ((a % 2) != 0)) {
+		for (int i = 2; i < ((h + 1) / 2); i++)
+			putchar('\n');
+		for (int i = ((h + 1) / 2); i == ((h + 1) / 2); i++) {
+			for (int j = 1; j <= c; j++) {
+				if ((j == (a / 2 + 1)) || (j == a + b + 2))
+					putchar(C);
+				else
+					putchar(' ');
+			}
+			for (int i = ((h + 1) / 2); i < h; i++)
+				putchar('\n');
+		}
+	}
+	//1.1.Для нечётной "h" и чётной "a"
+	if ((h > 4) && ((h % 2) != 0) && ((a % 2) == 0)) {
+		for (int i = 2; i < ((h + 1) / 2); i++)
+			putchar('\n');
+		for (int i = ((h + 1) / 2); i == ((h + 1) / 2); i++) {
+			for (int j = 1; j <= c; j++) {
+				if ((j == (a / 2 + 1)) || (j == a + b + 3))
+					putchar(C);
+				else
+					putchar(' ');
+			}
+			for (int i = ((h + 1) / 2); i < h; i++)
+				putchar('\n');
+		}
+	}
+	//2.1.Для чётных "h" и "a"
+	if ((h > 4) && ((h % 2) == 0) && ((a % 2) == 0)) {
+		for (int i = 2; i < (h / 2); i++)
+			putchar('\n');
+		for (int i = (h / 2); i == (h / 2); i++) {
+			for (int j = 1; j <= c; j++) {
+				if ((j == (a / 2 + 1)) || (j == a + b + 5))
+					putchar(C);
+				else
+					putchar(' ');
+			}
+			for (int i = (h / 2); i < (h - 1); i++)
+				putchar('\n');
+			for (int i = (h - 1); i == (h - 1); i++) {
+				for (int j = 1; j <= c; j++) {
+					if ((j == 1) || (j == c))
+						putchar(C);
+					else
+						putchar(' ');
+				}
+			}
+		}
+		putchar('\n');
+	}
+	//2.2.Для чётной "h" и нечётной "a"
+	if ((h > 4) && ((h % 2) == 0) && ((a % 2) != 0)) {
+		for (int i = 2; i < (h / 2); i++)
+			putchar('\n');
+		for (int i = (h / 2); i == (h / 2); i++) {
+			for (int j = 1; j <= c; j++) {
+				if ((j == (a / 2 + 2)) || (j == a + b + 2))
+					putchar(C);
+				else
+					putchar(' ');
+			}
+			for (int i = (h / 2); i < (h - 1); i++)
+				putchar('\n');
+			for (int i = (h - 1); i == (h - 1); i++) {
+				for (int j = 1; j <= c; j++) {
+					if ((j == 2) || (j == (c - 1)))
+						putchar(C);
+					else
+						putchar(' ');
+				}
+			}
+		}
+		putchar('\n');
+	}
+	//Нижнее основание
+	for (int j = 1; j <= c; j++)
+		putchar(C);
+	putchar('\n');
+}
