@@ -1,0 +1,26 @@
+//Вариант 1
+
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+#include <time.h>
+
+
+void main() {
+    setlocale(LC_ALL, "RUS");
+    struct tm *mytime;
+    time_t t;
+    t = time(NULL);
+    mytime = localtime(&t);
+    switch (mytime -> tm_wday) {
+      case 0: strcpy(mytime.tm_wday, " воскресенье"); break;
+      case 1: strcpy(, " понедельник"); break;
+      case 2: strcpy(, " вторник");     break;
+      case 3: strcpy(, " среда");       break;
+      case 4: strcpy(, " четверг");     break;
+      case 5: strcpy(, " пятница");     break;
+      case 6: strcpy(, " суббота");     break;
+    }
+    printf("Московское время %02d:%02d:%02d\nДень недели(словами): %d", mytime->tm_hour, mytime->tm_min, mytime->tm_sec, mytime->tm_wday);
+
+}
