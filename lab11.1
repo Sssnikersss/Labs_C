@@ -1,0 +1,31 @@
+//Вариант 11
+
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+#define N 3
+
+
+void main() {
+	setlocale(LC_ALL, "RUS");
+	float A[N];
+    float temp;
+    float sum = 0;
+    for (int i = 0; i < N; i++)
+    {
+        printf("a[%d] = ", i + 1);
+        scanf("%f", &temp);
+        A[i] = temp;
+        sum += A[i];
+    }
+    printf("\n");
+    printf("| Индекс | Исходное значение | Новое значение |\n");
+    for (int i = 0; i < N; i++)
+    {
+        printf("| %6d | %f          | %f       |\n", i, A[i], A[i] + A[N - 1]);
+    }
+    printf("\n");
+    printf("Среднее арифметическое: %f", sum / N);
+    printf("\n");
+}
