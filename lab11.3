@@ -1,0 +1,41 @@
+//Вариант 11
+
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+#define N 5
+
+
+void main() {
+    setlocale(LC_ALL, "RUS");
+
+    int A[N];
+    printf("Введите %d элемент(а/ов) массива:\n", N);
+    for (int i = 0; i < N; i++)
+    {
+        printf("A[%d] = ", i);
+        scanf("%d", &A[i]);
+    }
+    //Поиск минимального значения:
+    int min = A[0];
+    for (int i = 1; i < N; i++) {
+        if (A[i] < min)
+            min = A[i];
+    }
+    //Поиск максимального значения:
+    int max = A[0];
+    for (int i = 1; i < N; i++) {
+        if (A[i] > max)
+            max = A[i];
+    }
+    //Вычисление суммы элементов массива без min и max:
+    int sum = 0;
+    for (int i = 0; i < N; i++) {
+        if (A[i] == min || A[i] == max) 
+            continue;
+        else 
+            sum += A[i];
+    }
+    printf("Сумма элементов массива без минимального и максимального значений = %d\n", sum);
+}
