@@ -1,0 +1,40 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+#include <math.h>
+#define N 10
+#define n 1.3
+#define n1 3.4
+
+
+float func(float x);
+
+int main()
+{
+	float A[N];
+	int i = 0;
+	float sump = 0, sumot = 0, chisp = 0, chisot = 0, a;
+	setlocale(LC_ALL, "rus");
+	for (a = n; i < N; a += ((n1 - n) / N), i++)
+	{
+		A[i] = func(a);
+		if (A[i] > 0)
+		{
+			sump += A[i];
+			chisp++;
+		}
+		else
+		{
+			sumot += A[i];
+			chisot++;
+		}
+	}
+	printf("Имя массива = 'A'\nНакопленное положительное значение = %f\nНакопленное отрицательное значение = %f\nЧисло положительных элементов = %.0f\nЧисло отрицательных элементов = %.0f\nСреднее значение всех положительных элементов массива = %.4f\n", sump, sumot, chisp, chisot, sump / chisp);
+}
+
+float func(float x)
+{
+	float result;
+	result = 5 * pow(x, 3) + 2 * pow(x, 2) - 15 * x - 6;
+	return result;
+}
