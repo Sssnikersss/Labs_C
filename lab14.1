@@ -1,0 +1,43 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+#define N 1000
+#define q 1.3
+#define q1 3.4
+
+
+double* full_elements(double* ptr_array, int n);
+double func(double x);
+int put_elements(double* ptr_array, int n);
+
+void main() {
+    setlocale(LC_ALL, "RUS");
+    double array[N];
+    int size;
+    int i = 0;
+    double sump = 0, sumot = 0, chisp = 0, chisot = 0;
+    printf("Введите размер массива = ");
+    scanf("%d", &size);
+    full_elements(array, size);
+    put_elements(array, size);
+}
+
+double* full_elements(double* ptr_array, int n) {
+    double a;
+    int i = 0;
+    for (a = q; i < n; a += ((q1 - q) / n), i++) {
+        ptr_array[i] = func(a);
+    }
+}
+
+int put_elements(double* ptr_array, int n) {
+    for (int i = 0; i < n; i++) {
+        printf("A[%d] = %lf\n", i, ptr_array[i]);
+    }
+}
+
+double func(double x) {
+    double result;
+    result = 5 * pow(x, 3) + 2 * pow(x, 2) - 15 * x - 6;
+    return result;
+}
