@@ -1,0 +1,27 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <string.h>
+#include <ctype.h.>
+
+
+void main() {
+	setlocale(LC_ALL, "RUS");
+	system("chcp 1251");
+	char Snew[40] = "Good day, ";
+	char Name[20];
+
+	printf("What is your name?\n");
+	scanf("%s", &Name);
+	strcat(Snew, Name);
+	printf("%s!", Snew);
+	printf("\n");
+	for (int i = 0; i < 8; i++) {
+		Snew[i] = toupper(Snew[i]);
+	}
+	printf("%s!", Snew);
+	for (int i = strlen(Snew); i < 39; i++) {
+		printf("!");
+	}
+}
