@@ -1,0 +1,23 @@
+//Вариант 11
+
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <string.h>
+#include <ctype.h.>
+
+
+void main() {
+	setlocale(LC_ALL, "RUS");
+	system("chcp 1251");
+	char Snew[50] = "Добрый день, ";
+	char Name[20];
+
+	printf("Как вас зовут?\n");
+	scanf("%s", &Name);
+	Name[strlen(Name) - 2] = '-';
+	strcat(Snew, Name);
+	printf("%s!", Snew);
+	
+}
