@@ -1,0 +1,157 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <malloc.h>
+#include <stdio.h>
+#include <locale.h>
+#include <string.h>
+
+
+struct sotrudnik 
+{
+	char cod[20];
+	char dolgnost[30];
+	int startvremy_chas;
+	int startvremy_min;
+	int finvremy_chas;
+	int finvremy_min;
+	float prodolg;
+} *st;
+
+struct sotrudnik Add(struct sotrudnik* st, int A) //ВВОД БАЗЫ ДАННЫХ
+{
+	for (int i = 0; i < A; i++)
+	{
+		printf("Введите код сотрудника: ");
+		scanf("%s", st->cod);
+		printf("Введите должность сотрудника: ");
+		scanf("%s", &st->dolgnost);
+		printf("Введите время начала работы - часы и минуты (два числа через пробел): ");
+		scanf("%d %d", &st->startvremy_chas, &st->startvremy_min);
+		printf("Введите время окончания работы - часы и минуты (два числа через пробел): ");
+		scanf("%d %d", &st->finvremy_chas, &st->finvremy_min);
+		printf("\n");
+		st++;
+	}
+	return *st;
+}
+
+struct sotrudnik Poisk(struct sotrudnik* st, int A)//ПОИСК СТРУКТУРЫ ПО ЗАДАННОМУ КРИТЕРИЮ
+{
+	int k;
+	float mch;
+	int zadch1, zadmin1, zadch2, zadmin2;
+	printf("По какому критерию вы хотите осуществить поиск: \n");
+	printf("(1) - работавшие менее заданного количества часов в день.\n");
+	printf("(2) - работавшие в заданном интервале времени.\n");
+	scanf("%d", &k);
+	if (k == 1)
+	{
+		printf("Введите количество часов: ");
+		scanf("%f", &mch);
+		for (int j = 0; j < A; j++)
+		{
+			if ((st + j)->prodolg < mch)
+			{
+				printf("Код сотрудника: %s\n", (st + j)->cod);
+				printf("Должность сотрудника: %s\n", (st + j)->dolgnost);
+				printf("Время начала работы (часы и минуты): %d:%d\n", (st + j)->startvremy_chas, (st + j)->startvremy_min);
+				printf("Продолжительность работы в долях часа: %f\n", (((float)(st + j)->finvremy_chas * 60 + (float)(st + j)->finvremy_min) - ((float)(st + j)->startvremy_chas * 60 + (float)(st + j)->startvremy_min)) / 60);
+				puts("----------------------------------------------------");
+			}
+		}
+
+	}
+	if (k == 2)
+	{
+		printf("Введите начало работы - часы и минуты (два числа через пробел): ");
+		scanf("%d %d", &zadch1, &zadmin1);
+		printf("Введите окончание работы - часы и минуты (два числа через пробел): ");
+		scanf("%d %d", &zadch2, &zadmin2);
+		for (int j = 0; j < A; j++)
+		{
+			if (((st + j)->startvremy_chas >= zadch1) && ((st + j)->finvremy_chas <= zadch2))
+			{
+				if (((st + j)->startvremy_min >= zadmin1) && ((st + j)->finvremy_min <= zadmin2))
+				{
+					printf("Код сотрудника: %s\n", (st + j)->cod);
+					printf("Должность сотрудника: %s\n", (st + j)->dolgnost);
+					printf("Время начала работы (часы и минуты): %d:%d\n", (st + j)->startvremy_chas, (st + j)->startvremy_min);
+					printf("Продолжительность работы в долях часа: %f\n", (((float)(st + j)->finvremy_chas * 60 + (float)(st + j)->finvremy_min) - ((float)(st + j)->startvremy_chas * 60 + (float)(st + j)->startvremy_min)) / 60);
+					puts("----------------------------------------------------");
+				}
+			}
+		}
+		st++;
+	}
+	return *st;
+}
+
+void Print(struct sotrudnik* st, int A); //ПЕЧАТЬ БАЗЫ ДАННЫХ
+
+
+int main() //НАЧАЛО ОСНОВНОЙ ФУНКЦИИ**************************************************************************************
+{
+	int A;
+	setlocale(LC_ALL, "RUS"); /*Устанавливаем русскую раскладку*/
+	system("chcp 1251");
+	system("cls");
+
+	printf("Введите количество сотрудников: ");
+	scanf("%d", &A);
+	printf("\n");
+
+	st = malloc(A * sizeof(int));/*Выделение памяти*/
+
+	int menu;
+	int cycle = 1; // постоянная для создания цикла
+	while (cycle == 1)//меню базы данных
+	{
+		printf("\t\t\tМеню.\n");
+		printf("0. Выход из программы.\n");
+		printf("1. Ввод базы данных.\n");
+		printf("2. Печать базы данных.\n");
+		printf("3. Поиск структуры по критерию.\n\n");
+		printf("Введите номер пункта меню: ");
+		scanf("%d", &menu);
+		printf("\n");
+
+		switch (menu)
+		{
+		case 0:
+			break;
+		case 1://Ввод базы данных
+			Add(st, A);
+			break;
+		case 2://Печать базы данных
+			Print(st, A);
+			break;
+		case 3://Поиск структуры по критерию
+			Poisk(st, A);
+			break;
+		default:
+			printf("Неизвестный выбор\n");
+			break;
+		}
+
+		printf("Продолжить работу?(1 - да, 2 - нет): ");
+		scanf("%d", &cycle);
+		printf("\n");
+
+	}
+
+	free(st);
+	system("pause");
+
+}//КОНЕЦ ОСНОВНОЙ ФУНКЦИИ**************************************************************************************
+
+void Print(struct sotrudnik* st, int A) 
+{
+	for (int j = 0; j < A; j++)
+	{
+		printf("Код сотрудника: %s\n", st->cod);
+		printf("Должность сотрудника: %s\n", st->dolgnost);
+		printf("Время начала работы (часы и минуты): %d:%d\n", st->startvremy_chas, st->startvremy_min);
+		printf("Продолжительность работы в долях часа: %f\n", (((float)st->finvremy_chas * 60 + (float)st->finvremy_min) - ((float)st->startvremy_chas * 60 + (float)st->startvremy_min)) / 60);
+		puts("----------------------------------------------------");
+		st++;
+	}
+}
