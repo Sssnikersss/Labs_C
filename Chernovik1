@@ -1,40 +1,67 @@
-#define _CRT_SECURE_NO_DEPRECATE
+// Румянцев лабораторная 17.cpp : Этот файл содержит функцию "main". Здесь начинается и заканчивается выполнение программы.
+//
+
+#include <stdlib.h>
 #include <stdio.h>
-#include <locale.h>
+int init_massive();
+void sort_buble(int* ptrarr, int n);
+void sort_select(int* ptrarr, int n);
+void sort_insert(int* ptrarr, int n);
 
+int main()
+{
+    int n = 6;
+    int* massive;
+    massive = (int*)malloc(n * sizeof(int));
+    for (int i = 0; i < n; i++) {
+        massive[i] = rand() % 100;
+    }
+    
+    int n = 6;
+    sort_buble(massive,n);
+    sort_select(massive,n);
+    
 
-void main() {
-	setlocale(LC_ALL, "RUS");
-	long long int N, sum1 = 0, a, b;
-	int n = 0;
-
-	while (1) {
-		char a;
-
-	  printf("Введите произвольное число с чётным количеством разрядов:");
-	  scanf("%lld", &N); 
-	  printf("Введено число %lld\n", N);
-	  while (N > 0) {
-	  	n++;
-	  	N /= 10;
-	  }
-	  printf("В числе %d разряд(а/ов)\n\n", n);
-	 
-	  while ((n / 2) > 0) {
-		  a = N / pow(10, n + 1);
-		  sum1 += a;
-		  n--;
-	  }
-	  printf(" sum1 = %lld", sum1);
-	  
-	  
-	  
-	  
-	  n = 0;
-	  N = 0;
-	  
-	printf("Продолжить? (Да - y, нет - n)"); 
-	getchar();
-	if ((a = getchar()) == 'n') break;
-	}
 }
+void sort_buble(int *ptrarr, int n) {
+    
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < n; j++) {
+            if (ptrarr[i] < ptrarr[i + 1]) {
+                ptrarr[i+1] = ptrarr[i];
+            }
+        }
+    }
+    for (int i = 0; i < n; i++) {
+        printf("%d ", ptrarr[i]);
+    }
+    printf("\n");
+}
+void sort_select(int* ptrarr, int n) {
+    int max,nom,k,b;
+    k = n;
+    for (int i = 0; i < n; i++) {
+        max = ptrarr[0];
+        nom = 0;
+        for (int j = 0; j < n; j++) {
+            if (ptrarr[i] > max) {
+                max = ptrarr[i];
+                nom = i;
+            }
+        }
+        b = ptrarr[k - 1];
+        ptrarr[k - 1] = ptrarr[nom];
+        ptrarr[nom] = b;
+        k--;
+
+    }
+    for (int i = 0; i < n; i++) {
+        printf("%d ", ptrarr[i]);
+    }
+    printf("\n");
+}
+void sort_insert(int* ptrarr, int n) {
+    int i = 1;
+    
+}
+    
