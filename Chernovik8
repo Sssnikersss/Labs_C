@@ -1,0 +1,35 @@
+//Вариант 11
+
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <string.h>
+#include <ctype.h.>
+#define MAX 100
+
+
+int main() {
+	setlocale(LC_ALL, "RUS");
+	system("chcp 1251");
+	printf("\n");
+	char Snew[MAX];
+	int k = 0;
+
+
+	printf("Введите текст:\n");
+	fgets(Snew, MAX, stdin);
+
+	for (int i = 0; i < strlen(Snew); i++) {
+		if (Snew[i] == 'а' || Snew[i] == 'А') {
+			if (i == 0 || Snew[i - 1] == ' ')
+				k++;
+		}
+	}
+	if (k != 0)
+		printf("\nВ заданной строке ЕСТЬ слова, начинающиеся на букву 'a' (%d)\n", k);
+	else
+		printf("\nВ заданной строке НЕТ слов, начинающихся на букву 'a'\n");
+
+	return 0;
+}
