@@ -1,0 +1,159 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <locale.h>
+#include <malloc.h>
+#include <stdlib.h.>
+
+
+int put_elements(int* ptr_array, int N);
+void sort_buble(int* ptrarr, int n);
+void sort_buble1(int* ptrarr, int n);
+//void sort_select(int* ptrarr, int n);
+//void sort_buble2(int* ptrarr, int n);
+
+
+int main() {
+    setlocale(LC_ALL, "RUS");
+    int N;
+    int* massive;
+    printf("Введите размер массива: ");
+    scanf("%d", &N);
+    printf("\n");
+    //a:
+    massive = (int*)malloc(N * sizeof(int));
+    for (int i = 0; i < N; i++) {
+        massive[i] = rand() % 100;
+    }
+    printf("Начальный массив.а:\n");
+    put_elements(massive, N);
+
+    sort_buble(massive, N);//Пузырьковая сортировка
+    printf("Отсортированный массив.а (пузырьковая сортировка):\n");
+    put_elements(massive, N);
+    printf("\n");
+    //б:
+    for (int i = 0; i < N; i++) {
+        massive[i] = rand() % 100;
+    }
+    printf("Начальный массив.б:\n");
+    put_elements(massive, N);
+
+    sort_buble1(massive, N);//Шейкерная (перемешиванием) сортировка
+    printf("Отсортированный массив.б (шейкерная сортировка):\n");
+    put_elements(massive, N);
+    printf("\n");
+    //в:
+    massive = (int*)malloc(N * sizeof(int));
+    for (int i = 0; i < N; i++) {
+        massive[i] = rand() % 100;
+    }
+    printf("Начальный массив.а:\n");
+    put_elements(massive, N);
+
+    //Сюда функцию добавить
+    printf("Отсортированный массив.в (сортировка простым выбором):\n");
+    put_elements(massive, N);
+    printf("\n");
+    //г:
+
+    /*sort_buble2(massive, N);
+    printf("Отсортированный массив.2:\n");
+    put_elements(massive, N);
+    printf("\n");*/
+
+    free(massive);
+    return 7;
+}
+
+int put_elements(int* ptr_array, int N) {//Печать элементов
+    for (int i = 0; i < N; i++) {
+        printf("A[%d] = %d\n", i, ptr_array[i]);
+    }
+}
+
+void sort_buble(int* ptrarr, int N) {//Пузырьковая сортировка
+    int tmp;
+    for (int i = 0; i < N - 1; i++) {
+        for (int j = 0; j < N - i - 1; j++)
+        {
+            if (ptrarr[j] > ptrarr[j + 1])
+            {
+                tmp = ptrarr[j];
+                ptrarr[j] = ptrarr[j + 1];
+                ptrarr[j + 1] = tmp;
+            }
+        }
+    }
+}
+
+void sort_buble1(int* ptrarr, int N) {//Шейкерная (перемешиванием) сортировка
+    int left = 0;
+    int right = N - 1;
+    int last, tmp;
+    while (left < right) {
+        last = 0;
+        for (int i = left; i < right; i++) {
+            if (ptrarr[i] > ptrarr[i+1]) {
+                tmp = ptrarr[i];
+                ptrarr[i] = ptrarr[i + 1];
+                ptrarr[i + 1] = tmp;
+                last = i;
+            }
+        }
+        right = last;
+        for (int j = right; j >= left; j --) {
+            if (ptrarr[j] > ptrarr[j + 1]) {
+                tmp = ptrarr[j];
+                ptrarr[j] = ptrarr[j + 1];
+                ptrarr[j + 1] = tmp;
+                last = j;
+            }
+        }
+        left = last;
+    }
+}
+
+//void sort_select(int* ptrarr, int n) {//Сортировка простым выбором
+//
+//}
+
+/*void sort_select(int* ptrarr, int n) {
+    int max, nom, k, b;
+    k = n;
+    for (int i = 0; i < k - 1; i++) {
+        max = ptrarr[0];
+        nom = 0;
+        for (int j = 1; j < k; j++) {
+            if (ptrarr[j] > max) {
+                max = ptrarr[j];
+                nom = j;
+            }
+        }
+        b = ptrarr[k - 1];
+        ptrarr[k - 1] = ptrarr[nom];
+        ptrarr[nom] = b;
+        k--;
+    }
+}*/
+
+/*void sort_buble2(int* ptrarr, int n) {
+    int L = 2;
+    int R = n;
+    int i, j, x = 0, temp;
+    i = L;
+    j = R;
+    x = ptrarr[(i + j) / 2];
+    while (i < j) {
+        while (ptrarr[i] < x)
+            i++;
+        while (ptrarr[j] > x)
+            j--;
+        if (i <= j) {
+            temp = ptrarr[i];
+            ptrarr[i] = ptrarr[j];
+            ptrarr[j] = temp;
+            i++;
+            j--;
+        }
+    }
+}*/
