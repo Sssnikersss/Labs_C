@@ -71,11 +71,9 @@ int main() //НАЧАЛО ОСНОВНОЙ ФУНКЦИИ***********************
 			scanf("%d", &poisk);
 			if (poisk == 1) {
 				Poisk1(st, A);
-				
 			}
 			else if (poisk == 2) {
 				Poisk2(st, A);
-				Print(st, A);
 			}
 			else
 				printf("Неизвестная команда\n");
@@ -241,6 +239,7 @@ struct sotrudnik Poisk1(struct sotrudnik* st, int A)//Поиск структу�
 			puts("----------------------------------------------------");
 		}
 	}
+	return *st;
 }
 
 struct sotrudnik Poisk2(struct sotrudnik* st, int A)//Поиск структуры по работавшим в заданном интервале времени
@@ -265,7 +264,6 @@ struct sotrudnik Poisk2(struct sotrudnik* st, int A)//Поиск структу�
 			}
 		}
 	}
-st++;
-		
+st++;	
 return *st;
 }
