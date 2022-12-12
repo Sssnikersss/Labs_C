@@ -172,7 +172,7 @@ struct sotrudnik Sort2(struct sotrudnik* st, int A) {//Сортировка по
 	for (int i = 0; i < A - 1; i++) {
 		for (int j = 0; j < A - i - 1; j++)
 		{
-			if (1)
+			if ((720 - (st[j].startvremy_chas * 60 + st[j].startvremy_min)) > (720 - (st[j + 1].startvremy_chas * 60 + st[j + 1].startvremy_min)))
 			{
 				tmp = st[j];
 				st[j] = st[j + 1];
