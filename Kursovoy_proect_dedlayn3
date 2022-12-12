@@ -5,7 +5,16 @@
 #include <string.h>
 
 
-struct sotrudnik 
+struct sotrudnik Add(struct sotrudnik* st, int A);//Ввод базы данных
+struct sotrudnik Poisk1(struct sotrudnik* st, int A);//Поиск структуры по работавшим менее заданного количества часов в день
+struct sotrudnik Poisk2(struct sotrudnik* st, int A);//Поиск структуры по работавшим в заданном интервале времени
+struct sotrudnik Sort1(struct sotrudnik* st, int A);//Сортировка по продолжительности работы за первую половину дня
+struct sotrudnik Sort2(struct sotrudnik* st, int A);//Сортировка по продолжительности работы за вторую половину дня
+int writefile(struct sotrudnik* st, int A, char* fileName);//Запись в файл
+int readfile(char* fileName);//Чтение из файла
+void Print(struct sotrudnik* st, int A);//Печать базы данных
+
+struct sotrudnik
 {
 	char cod[20];
 	char dolgnost[30];
@@ -16,7 +25,98 @@ struct sotrudnik
 	float prodolg;
 } *st;
 
-struct sotrudnik Add(struct sotrudnik* st, int A) //ВВОД БАЗЫ ДАННЫХ
+int main() //НАЧАЛО ОСНОВНОЙ ФУНКЦИИ***************************************************************************************************************
+{
+	int A = 0;
+	setlocale(LC_ALL, "RUS");//устанавливаем русскую раскладку
+	system("chcp 1251");
+	system("cls");
+	st = malloc(A * sizeof(int));//выделение памяти
+	char* fileName = "sotrudnik.txt";
+
+	int poisk;
+	int sort;
+	int menu;
+	int cycle = 1; //постоянная для создания цикла
+	while (cycle == 1)//меню базы данных
+	{
+		printf("\t  Меню.\n");
+		printf("0. Выход из программы.\n");
+		printf("1. Ввод базы данных.\n");
+		printf("2. Печать базы данных.\n");
+		printf("3. Поиск структуры по критерию.\n");
+		printf("4. Сортировка по критерию.\n");
+		printf("5. Добавить данные в файл.\n");
+		printf("6. Прочесть данные из файла.\n\n");
+		printf("Введите номер пункта меню: ");
+		scanf("%d", &menu);
+		printf("\n");
+
+		switch (menu)
+		{
+		case 0:
+			break;
+		case 1://Ввод базы данных
+			printf("Введите количество сотрудников: ");
+			scanf("%d", &A);
+			Add(st, A);
+			break;
+		case 2://Печать базы данных
+			Print(st, A);
+			break;
+		case 3://Поиск структуры по критерию
+			printf("По какому критерию вы хотите осуществить поиск: \n");
+			printf("(1) - Работавшие менее заданного количества часов в день.\n");
+			printf("(2) - Работавшие в заданном интервале времени.\n");
+			scanf("%d", &poisk);
+			if (poisk == 1) {
+				Poisk1(st, A);
+			}
+			else if (poisk == 2) {
+				Poisk2(st, A);
+			}
+			else
+				printf("Неизвестная команда\n");
+			break;
+		case 4://Сортировка
+			printf("По какому критерию вы хотите осуществить сортировку: \n");
+			printf("(1) - Продолжительность работы за первую половину дня.\n");
+			printf("(2) - Продолжительность работы за вторую половину дня.\n");
+			scanf("%d", &sort);
+			if (sort == 1) {
+				Sort1(st, A);
+				Print(st, A);
+			}
+			else if (sort == 2) {
+				Sort2(st, A);
+				Print(st, A);
+			}
+			else
+				printf("Неизвестная команда\n");
+			break;
+		case 5://Добавление данных в файл
+			writefile(st, A, fileName);
+			break;
+		case 6://Чтение данных из файла
+			readfile(fileName);
+			break;
+		default:
+			printf("Неизвестная команда\n");
+			break;
+		}
+
+		printf("Продолжить работу?(1 - да, 2 - нет): ");
+		scanf("%d", &cycle);
+		printf("\n");
+
+	}
+
+	free(st);
+	system("pause");
+	return 7;
+}//КОНЕЦ ОСНОВНОЙ ФУНКЦИИ**************************************************************************************************************************
+
+struct sotrudnik Add(struct sotrudnik* st, int A)//Ввод базы данных
 {
 	for (int i = 0; i < A; i++)
 	{
@@ -34,116 +134,7 @@ struct sotrudnik Add(struct sotrudnik* st, int A) //ВВОД БАЗЫ ДАННЫ
 	return *st;
 }
 
-struct sotrudnik Poisk(struct sotrudnik* st, int A)//ПОИСК СТРУКТУРЫ ПО ЗАДАННОМУ КРИТЕРИЮ
-{
-	int k;
-	float mch;
-	int zadch1, zadmin1, zadch2, zadmin2;
-	printf("По какому критерию вы хотите осуществить поиск: \n");
-	printf("(1) - работавшие менее заданного количества часов в день.\n");
-	printf("(2) - работавшие в заданном интервале времени.\n");
-	scanf("%d", &k);
-	if (k == 1)
-	{
-		printf("Введите количество часов: ");
-		scanf("%f", &mch);
-		for (int j = 0; j < A; j++)
-		{
-			if ((st + j)->prodolg < mch)
-			{
-				printf("Код сотрудника: %s\n", (st + j)->cod);
-				printf("Должность сотрудника: %s\n", (st + j)->dolgnost);
-				printf("Время начала работы (часы и минуты): %d:%d\n", (st + j)->startvremy_chas, (st + j)->startvremy_min);
-				printf("Продолжительность работы в долях часа: %f\n", (((float)(st + j)->finvremy_chas * 60 + (float)(st + j)->finvremy_min) - ((float)(st + j)->startvremy_chas * 60 + (float)(st + j)->startvremy_min)) / 60);
-				puts("----------------------------------------------------");
-			}
-		}
-
-	}
-	if (k == 2)
-	{
-		printf("Введите начало работы - часы и минуты (два числа через пробел): ");
-		scanf("%d %d", &zadch1, &zadmin1);
-		printf("Введите окончание работы - часы и минуты (два числа через пробел): ");
-		scanf("%d %d", &zadch2, &zadmin2);
-		for (int j = 0; j < A; j++)
-		{
-			if (((st + j)->startvremy_chas >= zadch1) && ((st + j)->finvremy_chas <= zadch2))
-			{
-				if (((st + j)->startvremy_min >= zadmin1) && ((st + j)->finvremy_min <= zadmin2))
-				{
-					printf("Код сотрудника: %s\n", (st + j)->cod);
-					printf("Должность сотрудника: %s\n", (st + j)->dolgnost);
-					printf("Время начала работы (часы и минуты): %d:%d\n", (st + j)->startvremy_chas, (st + j)->startvremy_min);
-					printf("Продолжительность работы в долях часа: %f\n", (((float)(st + j)->finvremy_chas * 60 + (float)(st + j)->finvremy_min) - ((float)(st + j)->startvremy_chas * 60 + (float)(st + j)->startvremy_min)) / 60);
-					puts("----------------------------------------------------");
-				}
-			}
-		}
-		st++;
-	}
-	return *st;
-}
-
-void Print(struct sotrudnik* st, int A); //ПЕЧАТЬ БАЗЫ ДАННЫХ
-
-
-int main() //НАЧАЛО ОСНОВНОЙ ФУНКЦИИ**************************************************************************************
-{
-	int A;
-	setlocale(LC_ALL, "RUS"); /*Устанавливаем русскую раскладку*/
-	system("chcp 1251");
-	system("cls");
-
-	printf("Введите количество сотрудников: ");
-	scanf("%d", &A);
-	printf("\n");
-
-	st = malloc(A * sizeof(int));/*Выделение памяти*/
-
-	int menu;
-	int cycle = 1; // постоянная для создания цикла
-	while (cycle == 1)//меню базы данных
-	{
-		printf("\t\t\tМеню.\n");
-		printf("0. Выход из программы.\n");
-		printf("1. Ввод базы данных.\n");
-		printf("2. Печать базы данных.\n");
-		printf("3. Поиск структуры по критерию.\n\n");
-		printf("Введите номер пункта меню: ");
-		scanf("%d", &menu);
-		printf("\n");
-
-		switch (menu)
-		{
-		case 0:
-			break;
-		case 1://Ввод базы данных
-			Add(st, A);
-			break;
-		case 2://Печать базы данных
-			Print(st, A);
-			break;
-		case 3://Поиск структуры по критерию
-			Poisk(st, A);
-			break;
-		default:
-			printf("Неизвестный выбор\n");
-			break;
-		}
-
-		printf("Продолжить работу?(1 - да, 2 - нет): ");
-		scanf("%d", &cycle);
-		printf("\n");
-
-	}
-
-	free(st);
-	system("pause");
-
-}//КОНЕЦ ОСНОВНОЙ ФУНКЦИИ**************************************************************************************
-
-void Print(struct sotrudnik* st, int A) 
+void Print(struct sotrudnik* st, int A)//Печать базы данных
 {
 	for (int j = 0; j < A; j++)
 	{
@@ -154,4 +145,125 @@ void Print(struct sotrudnik* st, int A)
 		puts("----------------------------------------------------");
 		st++;
 	}
+}
+
+struct sotrudnik Sort1(struct sotrudnik* st, int A) {//Сортировка по продолжительности работы за первую половину дня
+
+	struct sotrudnik tmp;
+
+	for (int i = 0; i < A - 1; i++) {
+		for (int j = 0; j < A - i - 1; j++)
+		{
+			if ((720 - (st[j].startvremy_chas * 60 + st[j].startvremy_min)) > (720 - (st[j + 1].startvremy_chas * 60 + st[j + 1].startvremy_min)))
+			{
+				tmp = st[j];
+				st[j] = st[j + 1];
+				st[j + 1] = tmp;
+			}
+		}
+	}
+	return *st;
+}
+
+struct sotrudnik Sort2(struct sotrudnik* st, int A) {//Сортировка по продолжительности работы за вторую половину дня
+
+	struct sotrudnik tmp;
+
+	for (int i = 0; i < A - 1; i++) {
+		for (int j = 0; j < A - i - 1; j++)
+		{
+			if (1)
+			{
+				tmp = st[j];
+				st[j] = st[j + 1];
+				st[j + 1] = tmp;
+			}
+		}
+	}
+	return *st;
+}
+
+int writefile(struct sotrudnik* st, int A, char* fileName) {
+	FILE* fp;
+	if ((fp = fopen(fileName, "a+")) == NULL)
+	{
+		printf("Ошибка открытия файла для записи\n");
+		return 0;
+	}
+	for (int i = 0; i < A; i++) {
+		fprintf(fp, "%15s\t%20s\t\t\t %d:%d\t\t\t\t   %d:%d \n", st->cod, st->dolgnost, st->startvremy_chas, st->startvremy_min, st->finvremy_chas, st->finvremy_min);
+	}
+	fclose(fp);
+	printf("Данные успешно записаны в файл!\n");
+	return 1;
+}
+
+int readfile(char* fileName) {
+	FILE* fp;
+	char fileLine[100];
+	if ((fp = fopen(fileName, "r")) == NULL)
+	{
+		printf("Произошла ошибка при открытии файла\n");
+		return 0;
+	}
+	printf("Файл успешно открыт!\n");
+	printf("Начинаем чтение файла...\n\n");
+	printf("        Код\t\t     Должность \t\tВремя начала работы \t\tВремя окончания работы \n");
+	printf("     сотрудника\t\t    сотрудника\t\t  (часы и минуты)\t\t   (часы и минуты)\n");
+	while (!feof(fp))
+	{
+		fgets(fileLine, 100, fp);
+		if (!feof(fp))
+		{
+			puts(fileLine);
+		}
+	}
+	fclose(fp);
+	return(1);
+}
+
+struct sotrudnik Poisk1(struct sotrudnik* st, int A)//Поиск структуры по работавшим менее заданного количества часов в день
+{
+	float mch;
+
+	printf("Введите количество часов: ");
+	scanf("%f", &mch);
+	for (int j = 0; j < A; j++)
+	{
+		if (((((float)(st + j)->finvremy_chas * 60 + (float)(st + j)->finvremy_min) - ((float)(st + j)->startvremy_chas * 60 + (float)(st + j)->startvremy_min)) / 60) < mch) 
+		{
+			printf("Код сотрудника: %s\n", (st + j)->cod);
+			printf("Должность сотрудника: %s\n", (st + j)->dolgnost);
+			printf("Время начала работы (часы и минуты): %d:%d\n", (st + j)->startvremy_chas, (st + j)->startvremy_min);
+			printf("Продолжительность работы в долях часа: %f\n", (((float)(st + j)->finvremy_chas * 60 + (float)(st + j)->finvremy_min) - ((float)(st + j)->startvremy_chas * 60 + (float)(st + j)->startvremy_min)) / 60);
+			puts("----------------------------------------------------");
+		}
+	}
+	return *st;
+}
+
+struct sotrudnik Poisk2(struct sotrudnik* st, int A)//Поиск структуры по работавшим в заданном интервале времени
+{
+	int zadch1, zadmin1, zadch2, zadmin2;
+		
+	printf("Введите начало работы - часы и минуты (два числа через пробел): ");
+	scanf("%d %d", &zadch1, &zadmin1);
+	printf("Введите окончание работы - часы и минуты (два числа через пробел): ");
+	scanf("%d %d", &zadch2, &zadmin2);
+	for (int j = 0; j < A; j++)
+	{
+		if (((st + j)->startvremy_chas >= zadch1) && ((st + j)->finvremy_chas <= zadch2))
+		{
+			if (((st + j)->startvremy_min >= zadmin1) && ((st + j)->finvremy_min <= zadmin2))
+			{
+				printf("Код сотрудника: %s\n", (st + j)->cod);
+				printf("Должность сотрудника: %s\n", (st + j)->dolgnost);
+				printf("Время начала работы (часы и минуты): %d:%d\n", (st + j)->startvremy_chas, (st + j)->startvremy_min);
+				printf("Продолжительность работы в долях часа: %f\n", (((float)(st + j)->finvremy_chas * 60 + (float)(st + j)->finvremy_min) - ((float)(st + j)->startvremy_chas * 60 + (float)(st + j)->startvremy_min)) / 60);
+				puts("----------------------------------------------------");
+			}
+		}
+	}
+st++;	
+return *st;
 }
