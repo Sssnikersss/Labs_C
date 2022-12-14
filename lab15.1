@@ -1,0 +1,58 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <locale.h>
+#include <string.h>
+#include <stdlib.h>
+#define I 50
+#define J 50
+
+
+//1:
+int main() {
+	setlocale(LC_ALL, "RUS");
+	int i, j, row, col, jelement, jmax;
+	float array[I][J];
+
+	printf("Введите количество строк и столбцов массива (два числа через пробел): ");
+	scanf("%d %d", &row, &col);
+	if (!(row < I) || !(col < J)) return;
+
+	for (i = 0; i < row; i++) { //Заполнение массива 
+		for (j = 0; j < col; j++) {
+			array[i][j] = i + 1.f * (j + 1 - i) * rand() / RAND_MAX;
+		}
+	}
+
+	for (j = 0; j < col; j++) {
+		printf("    %d   \t", j); //Нумерация столбцов
+	}
+	printf("\n");
+
+	for (int i = 0; i < row; i++) { //Печать элементов массива
+		printf("%d| ", i); //Нумерация строк
+		for (int j = 0; j < col; j++) 
+		{
+			printf("%f\t", array[i][j]);
+		}
+		printf("\n");
+	}
+	printf("\n");
+
+	printf("Из строки с индексом 2 вывести элемент, находящийся в столбце: "); //Печать элемента из строки с индексом 2
+	scanf("%d", &jelement);
+	printf("A[2][%d] = %f\n\n", jelement, array[2][jelement]);
+
+	printf("Введите индекс столбца, в котором необходимо найти максимальный элемент: "); //Поиск максимального элемента массива в указанном столбце
+	scanf("%d", &jmax);
+	float max = array[0][jmax];
+	int k = 0;
+	for (i = 1; i < row; i++) {
+		if (array[i][jmax] > max) {
+			max = array[i][jmax];
+			k = i;
+		}
+	}
+	printf("Максимальный элемент в указанном столбце: A[%d][%d] = %f\n", k, jmax, max);
+
+	return 7;
+}
