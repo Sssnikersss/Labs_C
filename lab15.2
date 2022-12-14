@@ -1,0 +1,103 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <stdio.h>
+#include <locale.h>
+#include <string.h>
+#include <stdlib.h>
+#define I 7
+#define J 7
+#define MIN -10
+#define MAX 10
+
+
+//2:
+int main() {
+	setlocale(LC_ALL, "RUS");
+	int i, j;
+	int sum = 0, number = 0;
+	int pars = 0;
+	int array[I][J];
+
+	for (i = 0; i < I; i++) { //Заполнение массива 
+		for (j = 0; j < J; j++) {
+			array[i][j] = MIN + rand() % (MAX - MIN);
+		}
+	}
+
+	printf("\t\tИсходный массив:\n"); //Исходный массив
+	printf(" | ");
+	for (j = 0; j < J; j++) {
+		printf("%3d\t", j); //Нумерация столбцов
+	}
+	printf("\n");
+	printf("___________________________________________________\n");
+
+	for (i = 0; i < I; i++) { //Печать элементов массива
+		printf("%d| ", i); //Нумерация строк
+		for (j = 0; j < J; j++)
+		{
+			printf("%3d\t", array[i][j]);
+		}
+		printf("\n");
+	}
+	printf("\n\n");
+
+	int k; //Транспонирование исходного массива
+	for (i = 0; i < I; i++)
+	{
+		for (j = 0; j < i; j++)
+		{
+			k = array[i][j];
+			array[i][j] = array[j][i];
+			array[j][i] = k;
+		}
+	}
+	printf("\t\tТранспонированный массив:\n"); //Транспонированный массив
+	printf(" | ");
+	for (j = 0; j < J; j++) {
+		printf("%3d\t", j); //Нумерация столбцов
+	}
+	printf("\n");
+	printf("___________________________________________________\n");
+
+	for (i = 0; i < I; i++) { //Печать элементов массива
+		printf("%d| ", i); //Нумерация строк
+		for (j = 0; j < J; j++)
+		{
+			printf("%3d\t", array[i][j]);
+		}
+		printf("\n");
+	}
+	printf("\n\n");
+
+	for (j = 0; j < J; j++) { //Среднее арифметическое элементов четвёртой строки, кратных трём
+		if (array[4][j] % 3 == 0) {
+			sum = sum + array[4][j];
+			number++;
+		}
+	}
+	printf("Среднее арифметическое элементов четвёртой строки, кратных трём = %d\n\n", sum / number);
+
+	for (i = 0; i < I; i++) { //Число пар одинаковых соседних элементов, расположенных в одном столбце
+		for (j = 0; j < J - 1; j++) {
+			if (array[j][i] == array[j + 1][i]) {
+				pars++;
+			}
+		}
+	}
+	printf("Число пар одинаковых соседних элементов, расположенных в одном столбце = %d\n\n", pars);
+
+	int max = array[0][0];
+	int ik, jk;
+	for (int i = 0; i < I; i++) {
+		for (int j = 0; j < J; j++)
+			if (array[i][j] >= max) {
+				max = array[i][j];
+				ik = i;
+				jk = j;
+			}
+	}
+	printf("Координаты максимального элемента массива: (%d;%d)\n", ik, jk);
+	printf("A[%d][%d] = %d\n\n", ik, jk, max);
+
+	return 7;
+}
