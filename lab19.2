@@ -1,0 +1,79 @@
+#define _CRT_SECURE_NO_DEPRECATE
+#include <stdio.h>
+#include <stdlib.h>
+#include <locale.h>
+#include <string.h>
+#define MIN -100
+#define MAX 100
+
+
+float random(int A, int B, int K);
+
+int main(void) {
+	setlocale(LC_ALL, "RUS");
+
+	/*//1:
+	int element;
+	char fname[20] = "number.txt";
+	FILE* out;
+	puts("Создание файла");
+	if ((out = fopen(fname, "a")) == NULL) {
+		printf("Ошибка открытия файла для записи\n");
+		return 0;
+	}
+
+	//fprintf(out, "%d\n", 5);
+	//fprintf(out, "%0.2f\n", 12.56);
+	printf("Введите число, которое нужно записать в файл: ");
+	scanf("%d", &element);
+	fprintf(out, "%d\n", element);
+	fclose(out);*/
+
+	char fname1[20] = "temp.txt";
+	FILE* fp;
+	
+
+	int k;
+	int menu;
+	int cycle = 1;
+	while (cycle == 1) {
+		printf("\t  Меню.\n");
+		printf("1. Запись в новый файл.\n");
+		printf("2. Дозапись в существующий.\n");
+		printf("Введите номер пункта меню: ");
+		scanf("%d", &menu);
+		printf("\n");
+
+
+		switch (menu) {
+		case 1:
+
+			break;
+		case 2:
+			if ((fp = fopen(fname1, "a")) == NULL) {
+				printf("Ошибка открытия файла для записи\n");
+				return 0;
+			}
+			printf("Введите шаг табуляции: ");
+			scanf("%d", &k);
+			random(MIN, MAX, k);
+			break;
+		default:
+			printf("Неизвестная команда\n");
+			break;
+		}
+		printf("Продолжить работу?(1 - да, 2 - нет): ");
+		scanf("%d", &cycle);
+		printf("\n");
+	}
+
+	return 1;
+}
+
+float random(int A, int B, int K) {
+	float result;
+	for (int i = A; i <= B; i += K) {
+		result = A + 1.f * (B - A) * rand() / RAND_MAX;
+		printf("|%3.6f|\n", result);
+	}
+}
