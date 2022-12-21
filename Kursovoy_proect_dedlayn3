@@ -7,7 +7,7 @@
 
 struct sotrudnik Add(struct sotrudnik* st, int A);//Ввод базы данных
 struct sotrudnik Poisk1(struct sotrudnik* st, int A, float Kol);//Поиск структуры по работавшим менее заданного количества часов в день
-struct sotrudnik Poisk2(struct sotrudnik* st, int A);//Поиск структуры по работавшим в заданном интервале времени
+struct sotrudnik Poisk2(struct sotrudnik* st, int A, int Ch1, int Min1, int Ch2, int Min2);//Поиск структуры по работавшим в заданном интервале времени
 struct sotrudnik Sort1(struct sotrudnik* st, int A);//Сортировка по продолжительности работы за первую половину дня
 struct sotrudnik Sort2(struct sotrudnik* st, int A);//Сортировка по продолжительности работы за вторую половину дня
 int writefile(struct sotrudnik* st, int A, char* fileName);//Запись в файл
@@ -77,7 +77,13 @@ int main() //НАЧАЛО ОСНОВНОЙ ФУНКЦИИ***********************
 				Poisk1(st, A, mch);
 			}
 			else if (poisk == 2) {
-				Poisk2(st, A);
+				int zadch1, zadmin1, zadch2, zadmin2;
+				printf("Введите начало работы - часы и минуты (два числа через пробел): ");
+				scanf("%d %d", &zadch1, &zadmin1);
+				printf("Введите окончание работы - часы и минуты (два числа через пробел): ");
+				scanf("%d %d", &zadch2, &zadmin2);
+				printf("\n");
+				Poisk2(st, A, zadch1, zadmin1, zadch2, zadmin2);
 			}
 			else
 				printf("Неизвестная команда\n");
@@ -243,27 +249,21 @@ struct sotrudnik Poisk1(struct sotrudnik* st, int A, float Kol)//Поиск ст
 	return *st;
 }
 
-struct sotrudnik Poisk2(struct sotrudnik* st, int A)//Поиск структуры по работавшим в заданном интервале времени
+struct sotrudnik Poisk2(struct sotrudnik* st, int A, int Ch1, int Min1, int Ch2, int Min2)//Поиск структуры по работавшим в заданном интервале времени
 {
-	int zadch1, zadmin1, zadch2, zadmin2;
-
-	printf("Введите начало работы - часы и минуты (два числа через пробел): ");
-	scanf("%d %d", &zadch1, &zadmin1);
-	printf("Введите окончание работы - часы и минуты (два числа через пробел): ");
-	scanf("%d %d", &zadch2, &zadmin2);
+	
 	for (int j = 0; j < A; j++)
 	{
-		if (((st + j)->startvremy_chas >= zadch1) && ((st + j)->finvremy_chas <= zadch2))
+
+		if ((((st + j)->startvremy_chas > Ch1) || ((st + j)->startvremy_chas == Ch1 && (st + j)->startvremy_min >= Min1)) && (((st + j)->finvremy_chas < Ch2)  || (((st + j)->finvremy_chas == Ch2) && (st + j)->finvremy_min <= Min2)))
 		{
-			if (((st + j)->startvremy_min >= zadmin1) && ((st + j)->finvremy_min <= zadmin2))
-			{
-				printf("Код сотрудника: %s\n", (st + j)->cod);
-				printf("Должность сотрудника: %s\n", (st + j)->dolgnost);
-				printf("Время начала работы (часы и минуты): %d:%d\n", (st + j)->startvremy_chas, (st + j)->startvremy_min);
-				printf("Продолжительность работы в долях часа: %f\n", (((float)(st + j)->finvremy_chas * 60 + (float)(st + j)->finvremy_min) - ((float)(st + j)->startvremy_chas * 60 + (float)(st + j)->startvremy_min)) / 60);
-				puts("----------------------------------------------------");
-			}
+			printf("Код сотрудника: %s\n", (st + j)->cod);
+			printf("Должность сотрудника: %s\n", (st + j)->dolgnost);
+			printf("Время начала работы (часы и минуты): %d:%d\n", (st + j)->startvremy_chas, (st + j)->startvremy_min);
+			printf("Продолжительность работы в долях часа: %f\n", (((float)(st + j)->finvremy_chas * 60 + (float)(st + j)->finvremy_min) - ((float)(st + j)->startvremy_chas * 60 + (float)(st + j)->startvremy_min)) / 60);
+			puts("----------------------------------------------------");
 		}
+		
 	}
 	st++;
 	return *st;
