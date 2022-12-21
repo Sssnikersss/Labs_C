@@ -6,7 +6,7 @@
 
 
 struct sotrudnik Add(struct sotrudnik* st, int A);//Ввод базы данных
-struct sotrudnik Poisk1(struct sotrudnik* st, int A);//Поиск структуры по работавшим менее заданного количества часов в день
+struct sotrudnik Poisk1(struct sotrudnik* st, int A, float Kol);//Поиск структуры по работавшим менее заданного количества часов в день
 struct sotrudnik Poisk2(struct sotrudnik* st, int A);//Поиск структуры по работавшим в заданном интервале времени
 struct sotrudnik Sort1(struct sotrudnik* st, int A);//Сортировка по продолжительности работы за первую половину дня
 struct sotrudnik Sort2(struct sotrudnik* st, int A);//Сортировка по продолжительности работы за вторую половину дня
@@ -70,7 +70,11 @@ int main() //НАЧАЛО ОСНОВНОЙ ФУНКЦИИ***********************
 			printf("(2) - Работавшие в заданном интервале времени.\n");
 			scanf("%d", &poisk);
 			if (poisk == 1) {
-				Poisk1(st, A);
+				float mch;
+				printf("Введите количество часов: ");
+				scanf("%f", &mch);
+				printf("\n");
+				Poisk1(st, A, mch);
 			}
 			else if (poisk == 2) {
 				Poisk2(st, A);
@@ -222,15 +226,12 @@ int readfile(char* fileName) {
 	return(1);
 }
 
-struct sotrudnik Poisk1(struct sotrudnik* st, int A)//Поиск структуры по работавшим менее заданного количества часов в день
+struct sotrudnik Poisk1(struct sotrudnik* st, int A, float Kol)//Поиск структуры по работавшим менее заданного количества часов в день
 {
-	float mch;
 
-	printf("Введите количество часов: ");
-	scanf("%f", &mch);
 	for (int j = 0; j < A; j++)
 	{
-		if (((((float)(st + j)->finvremy_chas * 60 + (float)(st + j)->finvremy_min) - ((float)(st + j)->startvremy_chas * 60 + (float)(st + j)->startvremy_min)) / 60) < mch)
+		if (((((float)(st + j)->finvremy_chas * 60 + (float)(st + j)->finvremy_min) - ((float)(st + j)->startvremy_chas * 60 + (float)(st + j)->startvremy_min)) / 60) < Kol)
 		{
 			printf("Код сотрудника: %s\n", (st + j)->cod);
 			printf("Должность сотрудника: %s\n", (st + j)->dolgnost);
